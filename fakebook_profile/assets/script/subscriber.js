@@ -1,6 +1,16 @@
 // assets/script/subscriber.js
+
 import { User } from './user.js';
 
+/* 
+========================================
+STEP 1: SUBSCRIBER CLASS
+Purpose:
+- Extend User class
+- Add pages, groups, and monetization capability
+- Provide getters and helper methods
+- getInfo() combines base User info with subscriber-specific data
+*/
 export class Subscriber extends User {
   #pages;
   #groups;
@@ -13,12 +23,12 @@ export class Subscriber extends User {
     this.#canMonetize = Boolean(canMonetize);
   }
 
-  // getters required by the assignment
+  // explicit getters
   getPages() { return [...this.#pages]; }
   getGroups() { return [...this.#groups]; }
   getCanMonetize() { return this.#canMonetize; }
 
-  // getInfo uses the base class method and extends it
+  // getInfo combines base User info and subscriber info
   getInfo() {
     const base = super.getInfo();
     return {
@@ -28,9 +38,4 @@ export class Subscriber extends User {
       canMonetize: this.#canMonetize
     };
   }
-
-  // optional helpers
-  addPage(p) { this.#pages.push(p); }
-  addGroup(g) { this.#groups.push(g); }
-  enableMonetization() { this.#canMonetize = true; }
-}
+};

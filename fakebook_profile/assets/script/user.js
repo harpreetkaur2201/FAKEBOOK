@@ -1,30 +1,39 @@
-// assets/script/user.js
-export class User {
-  #id;
-  #name;
-  #userName;
-  #email;
+// assets/script/subscriber.js
 
-  constructor(id, name, userName, email) {
-    this.#id = id;
-    this.#name = name;
-    this.#userName = userName;
-    this.#email = email;
+import { User } from './user.js';
+
+/* 
+========================================
+STEP 1: SUBSCRIBER CLASS
+Purpose:
+- Extend User class
+- Add followers, following, and premium status
+- Provide method to get combined info
+*/
+export class Subscriber extends User {
+  #followers;
+  #following;
+  #isPremium;
+
+  constructor(id, name, userName, email, followers = [], following = [], isPremium = false) {
+    super(id, name, userName, email);
+    this.#followers = followers;
+    this.#following = following;
+    this.#isPremium = isPremium;
   }
 
-  // explicit getters required by the assignment
-  getId() { return this.#id; }
-  getName() { return this.#name; }
-  getUserName() { return this.#userName; }
-  getEmail() { return this.#email; }
+  // explicit getters
+  getFollowers() { return this.#followers; }
+  getFollowing() { return this.#following; }
+  getIsPremium() { return this.#isPremium; }
 
-  // getInfo returns an object with the 4 required fields
+  // getInfo includes base User info + Subscriber info
   getInfo() {
     return {
-      id: this.#id,
-      name: this.#name,
-      userName: this.#userName,
-      email: this.#email
+      ...super.getInfo(),
+      followers: this.#followers,
+      following: this.#following,
+      isPremium: this.#isPremium
     };
   }
 }

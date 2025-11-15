@@ -1,3 +1,11 @@
+/* 
+========================================
+STEP 1: GENERAL RESET
+Purpose:
+- Remove default padding/margin
+- Set box-sizing for easier sizing
+- Set default font
+*/
 * {
   padding: 0;
   margin: 0;
@@ -5,18 +13,24 @@
   font-family: Arial, sans-serif;
 }
 
+/* 
+========================================
+STEP 2: BODY
+Purpose:
+- Set background and default text color
+*/
 body {
   background: #f0f2f5;
   color: #1c1e21;
-  
 }
 
-.container {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 0 15px;
-}
-
+/* 
+========================================
+STEP 3: HEADER
+Purpose:
+- Display logo and navigation links
+- Style avatar
+*/
 header {
   display: flex;
   justify-content: space-between;
@@ -25,7 +39,6 @@ header {
   padding: 10px 20px;
   border-radius: 8px;
   color: #1877f2;
-  position: relative;
 }
 
 header .logo {
@@ -34,8 +47,6 @@ header .logo {
 }
 
 header nav {
-  position: absolute;
-  left: 30%;
   display: flex;
   gap: 15px;
   align-items: center;
@@ -58,35 +69,27 @@ header nav img.avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  
   cursor: pointer;
 }
 
+/* 
+========================================
+STEP 4: CREATE POST FORM
+Purpose:
+- Style post form, textarea, + button
+- Hide default file input
+*/
 .create-post {
-  max-width: 600px; 
-  margin: 20px auto; 
+  max-width: 600px;
+  margin: 20px auto;
 }
 
 .create-post form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
 }
 
-.create-post label {
-  cursor: pointer;
-  font-size: 20px;
-  background: #e4e6eb;
-  padding: 5px 10px;
-  border-radius: 8px;
-}
-
-#create-post input[type="file"] {
-  display: none; /* hide default choose file text */
-}
-
-#create-post textarea,
 .create-post textarea {
   width: 100%;
   min-height: 120px;
@@ -103,14 +106,15 @@ header nav img.avatar {
 }
 
 .file-label {
+  cursor: pointer;
+  font-size: 20px;
   background: #e4e6eb;
   padding: 5px 8px;
   border-radius: 8px;
-  cursor: pointer;
 }
 
 .controls input[type="file"] {
-  display: none;
+  display: none; /* hide default file input text */
 }
 
 #postBtn {
@@ -128,48 +132,46 @@ header nav img.avatar {
   cursor: not-allowed;
 }
 
-.posts {
-  margin-top: 20px;
+/* 
+========================================
+STEP 5: POSTS
+Purpose:
+- Display posts vertically
+- Add spacing between posts
+- Style each post
+*/
+.posts-container {
+  max-width: 600px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px; /* spacing between posts */
 }
 
 .post {
   background: white;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
 }
 
-.post-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.post-header .avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background: #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-}
-
-.post-body img {
+.post-body img,
+.post-body video {
   max-width: 100%;
   margin-top: 8px;
   border-radius: 8px;
 }
 
+/* 
+========================================
+STEP 6: MODAL
+Purpose:
+- Center modal overlay
+- Hidden by default
+*/
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -191,7 +193,7 @@ header nav img.avatar {
   max-width: 400px;
   width: 90%;
   position: relative;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   text-align: center;
 }
 
@@ -204,6 +206,12 @@ header nav img.avatar {
   color: #333;
 }
 
+/* 
+========================================
+STEP 7: ACCOUNT VIEW INSIDE MODAL
+Purpose:
+- Style avatar, name, bio, and buttons inside modal
+*/
 .account-view h2 {
   margin: 10px 0 5px 0;
   font-size: 1.2rem;
@@ -224,7 +232,6 @@ header nav img.avatar {
 
 .account-view div a {
   display: inline-block;
-  flex: 1;
   margin: 5px 3px;
   padding: 6px;
   border-radius: 8px;

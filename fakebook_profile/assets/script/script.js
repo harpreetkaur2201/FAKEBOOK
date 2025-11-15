@@ -1,5 +1,17 @@
+/* 
+========================================
+STEP 1: IMPORTS
+Purpose:
+- Import Subscriber class for user account info
+*/
 import { Subscriber } from './subscriber.js';
 
+/* 
+========================================
+STEP 2: DOM ELEMENTS
+Purpose:
+- Get references to all elements needed for posts and modal
+*/
 document.addEventListener('DOMContentLoaded', () => {
   const postForm = document.getElementById('postForm');
   const postText = document.getElementById('postText');
@@ -14,6 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBio = document.getElementById('modalBio');
   const modalAvatar = document.getElementById('modalAvatar');
 
+  /* 
+  STEP 3: ACCOUNT INFO
+  Purpose:
+  - Create a user account object with info and profile picture
+  */
   const account = new Subscriber(
     101,
     "Harpreet Kaur",
@@ -29,6 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
     profilePic: "./assets/Profile pic.jpg"
   };
 
+  /* 
+  STEP 4: POST CLASS
+  Purpose:
+  - Define structure for each post
+  - Render posts with header, text, and optional image/video
+  */
   class Post {
     constructor(userInfo, profile, text, image) {
       this.userInfo = userInfo;
@@ -42,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const postDiv = document.createElement('div');
       postDiv.className = 'post';
 
+      // Header with avatar and name
       const headerDiv = document.createElement('div');
       headerDiv.className = 'post-header';
 
@@ -68,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       headerDiv.appendChild(avatarDiv);
       headerDiv.appendChild(nameDiv);
 
+      // Body with text and image
       const bodyDiv = document.createElement('div');
       bodyDiv.className = 'post-body';
       if (this.text && this.text.trim() !== '') {
@@ -89,6 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* 
+  STEP 5: POST HANDLING
+  Purpose:
+  - Store posts
+  - Enable/disable Post button based on content
+  - Create posts with text and optional image
+  - Render posts with spacing between them
+  */
   const posts = [];
 
   function togglePostBtn() {
@@ -112,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function createPost(imageData) {
     const userInfo = account.getInfo();
     const newPost = new Post(userInfo, accountProfile, postText.value, imageData);
-    posts.unshift(newPost);
+    posts.unshift(newPost); // latest post on top
     renderPosts();
     postForm.reset();
     togglePostBtn();
@@ -125,6 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* 
+  STEP 6: MODAL FUNCTIONALITY
+  Purpose:
+  - Show profile info when avatar clicked
+  - Close modal when clicking close button or overlay
+  */
   headerAvatar.addEventListener('click', (e) => {
     e.preventDefault();
     const info = account.getInfo();
@@ -148,5 +187,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === modal) modal.setAttribute('aria-hidden', 'true');
   });
 
-  togglePostBtn();
+  togglePostBtn(); // initialize post button state
 });
