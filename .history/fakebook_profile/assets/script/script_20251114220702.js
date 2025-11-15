@@ -1,13 +1,14 @@
 import { Subscriber } from './subscriber.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Post elements
   const postForm = document.getElementById('postForm');
   const postText = document.getElementById('postText');
   const imageInput = document.getElementById('imageInput');
   const postBtn = document.getElementById('postBtn');
   const postsContainer = document.getElementById('posts');
 
-  // Modal elements (optional)
+  // Modal elements
   const headerAvatar = document.getElementById('headerAvatar');
   const modal = document.getElementById('modal');
   const closeModalBtn = document.getElementById('closeModal');
@@ -15,15 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBio = document.getElementById('modalBio');
   const modalAvatar = document.getElementById('modalAvatar');
 
-  // Subscriber account
+  // User account
   const account = new Subscriber(
     101,
     "Harpreet Kaur",
     "harpreet123",
     "harpreet@example.com",
-    ["Food Lovers", "Travel Diaries"], // pages
-    ["Winnipeg Students", "Punjabi Group"], // groups
-    true // canMonetize
+    ["Food Lovers", "Travel Diaries"],
+    ["Winnipeg Students", "Punjabi Group"],
+    true
   );
 
   const accountProfile = {
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const postDiv = document.createElement('div');
       postDiv.className = 'post';
 
-      // Header
+      // Post header
       const headerDiv = document.createElement('div');
       headerDiv.className = 'post-header';
 
@@ -71,10 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       nameDiv.appendChild(nameEl);
       nameDiv.appendChild(timeEl);
+
       headerDiv.appendChild(avatarDiv);
       headerDiv.appendChild(nameDiv);
 
-      // Body
+      // Post body
       const bodyDiv = document.createElement('div');
       bodyDiv.className = 'post-body';
 
@@ -99,9 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Posts array
   const posts = [];
 
-  // Enable/disable post button
   function togglePostBtn() {
     postBtn.disabled = postText.value.trim() === '' && imageInput.files.length === 0;
   }
@@ -109,21 +111,20 @@ document.addEventListener('DOMContentLoaded', () => {
   postText.addEventListener('input', togglePostBtn);
   imageInput.addEventListener('change', togglePostBtn);
 
-  // Submit post
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const userInfo = account.getInfo();
 
     if (imageInput.files[0]) {
       const reader = new FileReader();
-      reader.onload = () => createPost(reader.result, userInfo);
+      reader.onload = () => createPost(reader.result);
       reader.readAsDataURL(imageInput.files[0]);
     } else {
-      createPost(null, userInfo);
+      createPost(null);
     }
   });
 
-  function createPost(imageData, userInfo) {
+  function createPost(imageData) {
+    const userInfo = account.getInfo();
     const newPost = new Post(userInfo, accountProfile, postText.value, imageData);
     posts.unshift(newPost);
     renderPosts();
@@ -138,5 +139,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  togglePostBtn(); // initialize
+  // Modal functionality
+  headerAvatar.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    modalName.textContent = account.getName();
+    modalBio.textContent = `${accountProfile.bio} | ${accountProfile.personality} | "${accountProfile.motivation}"`;
+
+    modalAvatar.innerHTML = '';
+    if (accountProfile.profilePic) {
+      const img = document.createElement('img');
+      img.src = accountProfile.profilePic;
+      img.alt = account.getName();
+      modalAvatar.appendChild(img);
+    }
+
+    modal.setAttribute('aria-hidden', 'false');
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    modal.setAttribute('aria-hidden', 'true');
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.setAttribute('aria-hidden', 'true');
+  });
+
+  togglePostBtn(); // initialize post button state
 });

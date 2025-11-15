@@ -1,13 +1,14 @@
 import { Subscriber } from './subscriber.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Post elements
   const postForm = document.getElementById('postForm');
   const postText = document.getElementById('postText');
   const imageInput = document.getElementById('imageInput');
   const postBtn = document.getElementById('postBtn');
   const postsContainer = document.getElementById('posts');
 
-  // Modal elements (optional)
+  // Modal elements
   const headerAvatar = document.getElementById('headerAvatar');
   const modal = document.getElementById('modal');
   const closeModalBtn = document.getElementById('closeModal');
@@ -15,15 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBio = document.getElementById('modalBio');
   const modalAvatar = document.getElementById('modalAvatar');
 
-  // Subscriber account
+  // User account
   const account = new Subscriber(
     101,
     "Harpreet Kaur",
     "harpreet123",
     "harpreet@example.com",
-    ["Food Lovers", "Travel Diaries"], // pages
-    ["Winnipeg Students", "Punjabi Group"], // groups
-    true // canMonetize
+    ["Winnipeg Students", "Punjabi Group"],
+    ["Food Lovers", "Travel Diaries"],
+    true
   );
 
   const accountProfile = {
@@ -47,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const postDiv = document.createElement('div');
       postDiv.className = 'post';
 
-      // Header
       const headerDiv = document.createElement('div');
       headerDiv.className = 'post-header';
 
@@ -74,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
       headerDiv.appendChild(avatarDiv);
       headerDiv.appendChild(nameDiv);
 
-      // Body
       const bodyDiv = document.createElement('div');
       bodyDiv.className = 'post-body';
 
@@ -101,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const posts = [];
 
-  // Enable/disable post button
   function togglePostBtn() {
     postBtn.disabled = postText.value.trim() === '' && imageInput.files.length === 0;
   }
@@ -109,9 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
   postText.addEventListener('input', togglePostBtn);
   imageInput.addEventListener('change', togglePostBtn);
 
-  // Submit post
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    // get user info correctly
     const userInfo = account.getInfo();
 
     if (imageInput.files[0]) {
@@ -138,5 +137,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  togglePostBtn(); // initialize
+  // Modal functionality
+  headerAvatar.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const info = account.getInfo();
+    modalName.textContent = info.name; // now correct
+    modalBio.textContent = `${accountProfile.bio} | ${accountProfile.personality} | "${accountProfile.motivation}"`;
+
+    modalAvatar.innerHTML = '';
+    if (accountProfile.profilePic) {
+      const img = document.createElement('img');
+      img.src = accountProfile.profilePic;
+      img.alt = info.name;
+      modalAvatar.appendChild(img);
+    }
+
+    modal.setAttribute('aria-hidden', 'false');
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    modal.setAttribute('aria-hidden', 'true');
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.setAttribute('aria-hidden', 'true');
+  });
+
+  togglePostBtn(); // initialize post button state
 });

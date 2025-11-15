@@ -1,13 +1,14 @@
 import { Subscriber } from './subscriber.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Post elements
   const postForm = document.getElementById('postForm');
   const postText = document.getElementById('postText');
   const imageInput = document.getElementById('imageInput');
   const postBtn = document.getElementById('postBtn');
   const postsContainer = document.getElementById('posts');
 
-  // Modal elements (optional)
+  // Modal elements
   const headerAvatar = document.getElementById('headerAvatar');
   const modal = document.getElementById('modal');
   const closeModalBtn = document.getElementById('closeModal');
@@ -15,15 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBio = document.getElementById('modalBio');
   const modalAvatar = document.getElementById('modalAvatar');
 
-  // Subscriber account
+  // User account
   const account = new Subscriber(
     101,
     "Harpreet Kaur",
     "harpreet123",
     "harpreet@example.com",
-    ["Food Lovers", "Travel Diaries"], // pages
-    ["Winnipeg Students", "Punjabi Group"], // groups
-    true // canMonetize
+    ["Food Lovers", "Travel Diaries"],
+    ["Winnipeg Students", "Punjabi Group"],
+    true
   );
 
   const accountProfile = {
@@ -99,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Posts array
   const posts = [];
 
   // Enable/disable post button
@@ -112,6 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Submit post
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    // ✅ Correct: get full user info
     const userInfo = account.getInfo();
 
     if (imageInput.files[0]) {
@@ -138,5 +142,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  togglePostBtn(); // initialize
+  togglePostBtn(); // initialize post button
 });
