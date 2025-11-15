@@ -1,7 +1,6 @@
-import { User } from './user.js';
-import { Subscriber } from './subscriber.js';
-
 document.addEventListener('DOMContentLoaded', () => {
+
+  // Elements
   const postForm = document.getElementById('postForm');
   const postText = document.getElementById('postText');
   const imageInput = document.getElementById('imageInput');
@@ -15,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBio = document.getElementById('modalBio');
   const modalAvatar = document.getElementById('modalAvatar');
 
+  // Current user
   const user = {
     name: "Harpreet Kaur",
     bio: "Hi! I love food and travel.",
@@ -22,15 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Post constructor
-  class Post {
-    constructor(user, text, image) {
-      this.user = user;
-      this.text = text;
-      this.image = image;
-      this.time = new Date();
-    }
+  function Post(user, text, image) {
+    this.user = user;
+    this.text = text;
+    this.image = image;
+    this.time = new Date();
 
-    render() {
+    this.render = function() {
       const postDiv = document.createElement('div');
       postDiv.className = 'post';
 
