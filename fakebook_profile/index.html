@@ -64,7 +64,6 @@
 
         <!-- Controls for uploading media and submitting -->
         <div class="controls">
-          <!-- + button for file input -->
           <label for="imageInput" class="file-label">+</label>
           <input id="imageInput" type="file" accept="image/*,video/*">
           
@@ -87,16 +86,17 @@
   - Can show profile info or user details
   - Activated via JS when needed
   -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-content">
-      <a href="#" id="closeModal">Close</a>
-      <div>
-        <div id="modalAvatar"></div>
-        <h2 id="modalName">Your Name</h2>
-        <p id="modalBio"></p>
-      </div>
-    </div>
+ <!-- MODAL -->
+<div id="modal" class="modal" aria-hidden="true">
+<div class="modal-content">
+<button id="closeModal" class="close-btn">Close</button>
+    <img id="modalAvatar" class="modal-img" src="" alt="Profile">
+    <h2 id="modalName"></h2>
+    <p id="modalBio"></p>
+    <p id="modalPersonality"></p>
+    <p id="modalMotivation"></p>
   </div>
+</div>
 
   <!-- 
   =========================

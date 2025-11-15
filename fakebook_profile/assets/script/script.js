@@ -1,39 +1,42 @@
+// script.js
 import { Subscriber } from './subscriber.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // ======= DOM ELEMENTS =======
   const postForm = document.getElementById('postForm');
   const postText = document.getElementById('postText');
   const imageInput = document.getElementById('imageInput');
   const postBtn = document.getElementById('postBtn');
   const postsContainer = document.getElementById('posts');
 
-  // Modal elements (optional)
-  const headerAvatar = document.getElementById('headerAvatar');
+  const profileLink = document.getElementById('profileLink');
   const modal = document.getElementById('modal');
   const closeModalBtn = document.getElementById('closeModal');
   const modalName = document.getElementById('modalName');
   const modalBio = document.getElementById('modalBio');
-  const modalAvatar = document.getElementById('modalAvatar');
+  const modalPersonality = document.getElementById('modalPersonality');
+  const modalMotivation = document.getElementById('modalMotivation');
+  const modalAvatar = document.getElementById('modalAvatar'); // <img> tag
 
-  // Subscriber account
+  // ======= ACCOUNT DATA =======
   const account = new Subscriber(
     101,
     "Harpreet Kaur",
     "harpreet123",
     "harpreet@example.com",
-    ["Food Lovers", "Travel Diaries"], // pages
-    ["Winnipeg Students", "Punjabi Group"], // groups
-    true // canMonetize
+    ["Food Lovers", "Travel Diaries"], 
+    ["Winnipeg Students", "Punjabi Group"], 
+    true 
   );
 
   const accountProfile = {
     bio: "Hi! I love food and travel.",
-    profilePic: "./assets/Profile pic.jpg",
+    profilePic: "./assets/Profile pic.jpg", // ✅ Correct path
     personality: "Energetic & Curious",
     motivation: "Keep exploring every day!"
   };
 
-  // Post class
+  // ======= POST CLASS =======
   class Post {
     constructor(userInfo, profile, text, image) {
       this.userInfo = userInfo;
@@ -101,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const posts = [];
 
-  // Enable/disable post button
+  // ======= POST BUTTON LOGIC =======
   function togglePostBtn() {
     postBtn.disabled = postText.value.trim() === '' && imageInput.files.length === 0;
   }
@@ -109,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
   postText.addEventListener('input', togglePostBtn);
   imageInput.addEventListener('change', togglePostBtn);
 
-  // Submit post
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const userInfo = account.getInfo();
@@ -138,5 +140,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  togglePostBtn(); // initialize
+  togglePostBtn(); // initialize post button
+
+  // ======= PROFILE MODAL LOGIC =======
+  profileLink.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    modalName.textContent = account.getInfo().name;
+    modalBio.textContent = accountProfile.bio;
+    modalPersonality.textContent = `Personality: ${accountProfile.personality}`;
+    modalMotivation.textContent = `Motivation: ${accountProfile.motivation}`;
+
+    // Set <img> src for modal
+    modalAvatar.src = accountProfile.profilePic;
+    modalAvatar.style.width = '100px';
+    modalAvatar.style.height = '100px';
+    modalAvatar.style.borderRadius = '50%';
+
+    modal.setAttribute('aria-hidden', 'false'); // show modal
+  });
+
+  closeModalBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.setAttribute('aria-hidden', 'true'); // hide modal
+  });
 });
