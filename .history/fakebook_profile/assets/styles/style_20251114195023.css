@@ -8,7 +8,8 @@
 body {
   background: #f0f2f5;
   color: #1c1e21;
-  
+  flex-direction: column;
+  align-items: center;
 }
 
 .container {
@@ -25,7 +26,6 @@ header {
   padding: 10px 20px;
   border-radius: 8px;
   color: #1877f2;
-  position: relative;
 }
 
 header .logo {
@@ -34,11 +34,9 @@ header .logo {
 }
 
 header nav {
-  position: absolute;
-  left: 30%;
   display: flex;
-  gap: 15px;
   align-items: center;
+  gap: 15px;
 }
 
 header nav a {
@@ -58,32 +56,17 @@ header nav img.avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  
-  cursor: pointer;
-}
-
-.create-post {
-  max-width: 600px; 
-  margin: 20px auto; 
+  object-fit: cover;
 }
 
 .create-post form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
-}
-
-.create-post label {
-  cursor: pointer;
-  font-size: 20px;
-  background: #e4e6eb;
-  padding: 5px 10px;
-  border-radius: 8px;
-}
-
-#create-post input[type="file"] {
-  display: none; /* hide default choose file text */
+  background: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 10px;
 }
 
 #create-post textarea,

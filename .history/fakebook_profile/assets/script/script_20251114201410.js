@@ -1,3 +1,4 @@
+import { User } from './user.js';
 import { Subscriber } from './subscriber.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -138,10 +139,24 @@ document.addEventListener('DOMContentLoaded', () => {
       modalAvatar.appendChild(img);
     }
     modal.setAttribute('aria-hidden', 'false');
+});
+
+    const extra = document.createElement('div');
+    extra.innerHTML = `<small>Pages: ${info.pages.join(', ')}</small><br>
+                       <small>Groups: ${info.groups.join(', ')}</small><br>
+                       <small>Can monetize: ${info.canMonetize}</small>`;
+    modalAvatar.parentElement.appendChild(extra);
+
+    modal.setAttribute('aria-hidden', 'false');
   });
 
   closeModalBtn.addEventListener('click', () => {
     modal.setAttribute('aria-hidden', 'true');
+    const parent = modalAvatar.parentElement;
+    if (parent.lastElementChild && parent.lastElementChild.tagName === 'DIV' &&
+        parent.lastElementChild.innerHTML.includes('Can monetize')) {
+      parent.removeChild(parent.lastElementChild);
+    }
   });
 
   modal.addEventListener('click', (e) => {
