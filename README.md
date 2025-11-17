@@ -11,7 +11,7 @@ It includes:
 ## Live Demo
 
 Check out the live version of the application here:  
-[Fakebook Web App](http://127.0.0.1:5500/fakebook_profile/index.html)
+[Fakebook Web App](https://harpreetkaur2201.github.io/FAKEBOOK/)
 
 ## Features
 
