@@ -22,6 +22,7 @@ It is designed to simulate a simplified version of a social platform where users
 
 The home page is designed to look like a social media feed (similar to Facebook).
 Users can create posts with text and also upload images or videos. All posts are displayed dynamically in a feed layout.
+
 <img width="1886" height="647" alt="Screenshot 2026-05-11 134312" src="https://github.com/user-attachments/assets/5f05e937-8ddf-4dbe-87ef-1e286df6e697" />
 
 
