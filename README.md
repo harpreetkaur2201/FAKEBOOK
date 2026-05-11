@@ -30,6 +30,7 @@ Users can create posts with text and also upload images or videos. All posts are
 The profile section is a simple modal window that displays basic user information.
 It represents a clean and minimal user profile interface.
 
-<img width="619" height="403" alt="Screenshot 2026-05-11 134332" src="https://github.com/user-attachments/assets/ad199e86-fd51-45b0-8808-8f848ea6c817" />
-
+<p align="center">
+  <img alt="Fakebook Screenshot" src="https://github.com/user-attachments/assets/ad199e86-fd51-45b0-8808-8f848ea6c817" />
+</p>
 
